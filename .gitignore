@@ -1,0 +1,6 @@
+.env
+.venv/
+__pycache__/
+kit/
+sample_data/
+sample_seed.py
