@@ -498,8 +498,11 @@ def list_attendance(
 def month_bounds(month: str):
     if not re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", month):
         raise HTTPException(422, "month must be YYYY-MM")
-    start = date.fromisoformat(month + "-01")
-    end = date(start.year + (start.month == 12), 1 if start.month == 12 else start.month + 1, 1)
+    try:
+        start = date.fromisoformat(month + "-01")
+        end = date(start.year + (start.month == 12), 1 if start.month == 12 else start.month + 1, 1)
+    except ValueError:
+        raise HTTPException(422, "month is out of range")
     return month + "-01", end.isoformat()
 
 
@@ -647,7 +650,7 @@ def late_leaderboard(
     items=[
         {
             "rank": r["rank"],
-            "emp_code": r["id"], 
+            "emp_code": r["_id"], 
             "name": r["employee"]["name"], 
             "department": r["employee"]["department"], 
             "total_late_minutes": r["total_late_minutes"],
