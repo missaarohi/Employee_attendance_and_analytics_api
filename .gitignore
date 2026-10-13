@@ -4,3 +4,4 @@ __pycache__/
 kit/
 sample_data/
 bulk_seed.py
+sample_seed.py
