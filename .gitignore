@@ -6,4 +6,3 @@ sample_data/
 sample_seed.py
 extra_seed.py
 bulk_seed.py
-concurrency_check.py
